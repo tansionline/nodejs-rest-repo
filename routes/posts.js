@@ -5,7 +5,6 @@ const router = express.Router()
 
 
 
-
 // Get back all the posts 
 router.get('/', async (req, res) => {
     try {
