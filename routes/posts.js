@@ -25,10 +25,7 @@ router.get('/', async (req, res) => {
 
 //Submits a post 
 router.post('/create', async (req,res) => {
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description
-    }) 
+    res.render('createpost')
     try{
     const savedPost = await post.save()
     res.json(savedPost)
