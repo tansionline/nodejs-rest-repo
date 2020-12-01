@@ -4,7 +4,10 @@ const bodyParser = require('body-parser')
 const loginRoute = require('./routes/login')
 const postsRoute = require('./routes/posts')
 const app = express()
+const path = require('path')
 require('dotenv/config')
+
+app.set('view engine', 'pug')
 
 app.use(bodyParser.json())
 // Routes Here!

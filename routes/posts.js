@@ -1,15 +1,22 @@
+const { json } = require('body-parser')
 const { response } = require('express')
 const express = require('express')
 const Post = require('../models/Post')
 const router = express.Router()
 
 
-
 // Get back all the posts 
 router.get('/', async (req, res) => {
     try {
-        const posts = await Post.find()
-        res.json(posts)
+        let posts = await Post.find()
+
+        posts = posts.map( (select) => {
+            return select.description 
+        })
+
+        let title = posts.pop()
+
+        res.render('content', { posts, title })
     }
     catch (err){
         res.json({message:err})
@@ -17,7 +24,7 @@ router.get('/', async (req, res) => {
 })
 
 //Submits a post 
-router.post('/', async (req,res) => {
+router.post('/create', async (req,res) => {
     const post = new Post({
         title: req.body.title,
         description: req.body.description
